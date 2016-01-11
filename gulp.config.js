@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function() {
     var client = './src/client/';
     var server = './src/server/';
     var clientApp = client + 'app/';
@@ -6,12 +6,11 @@ module.exports = function () {
     var root = './';
     var specRunnerFile = 'specs.html';
     var temp = './.tmp/';
-    var tsoutput = clientApp + '/tsoutput/';
     var wiredep = require('wiredep');
     var bowerFiles = wiredep({devDependencies: true})['js'];
     var bower = {
         json: require('./bower.json'),
-        directory: './tools/bower_components/',
+        directory: './bower_components/',
         ignorePath: '../..'
     };
     var nodeModules = 'node_modules';
@@ -25,15 +24,8 @@ module.exports = function () {
             './src/**/*.js',
             './*.js'
         ],
-        // all javascript that we want to vet
-        allvetjs: [
-            './src/**/*.js',
-            './*.js',
-            '!' + tsoutput + '**/*.js'
-        ],
         build: './build/',
         client: client,
-        clientApp: clientApp,
         css: temp + 'styles.css',
         fonts: bower.directory + 'font-awesome/fonts/**/*.*',
         html: client + '**/*.html',
@@ -61,10 +53,6 @@ module.exports = function () {
             client + 'stubs/**/*.js'
         ],
         temp: temp,
-        ts: [
-            clientApp + '**/*.ts'
-        ],
-        tsout: tsoutput,
 
         /**
          * optimized files
@@ -90,7 +78,7 @@ module.exports = function () {
         templateCache: {
             file: 'templates.js',
             options: {
-                module: 'eventmanaging',
+                module: 'app.core',
                 root: 'app/',
                 standalone: false
             }
@@ -140,7 +128,7 @@ module.exports = function () {
     /**
      * wiredep and bower settings
      */
-    config.getWiredepDefaultOptions = function () {
+    config.getWiredepDefaultOptions = function() {
         var options = {
             bowerJson: config.bower.json,
             directory: config.bower.directory,
